@@ -380,7 +380,7 @@ void TitleState::Draw(Renderer &renderer) const
    extra = L" debug";
 #endif
 
-   version << Text(WSTRING(L"version " << PianoGameVersionString << extra), Gray);
+   version << Text(WSTRING(L"version " << PianoGameVersionString << extra << " Remastered by @VictorieeMan"), Gray);
 
    Layout::DrawHorizontalRule(renderer, GetStateWidth(), GetStateHeight() - Layout::ScreenMarginY);
 
