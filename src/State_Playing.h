@@ -20,7 +20,7 @@ class MidiCommIn;
 
 struct ActiveNote
 {
-   bool operator()(const ActiveNote &lhs, const ActiveNote &rhs)
+   bool operator()(const ActiveNote &lhs, const ActiveNote &rhs) const
    {
       if (lhs.note_id < rhs.note_id) return true;
       if (lhs.note_id > rhs.note_id) return false;
