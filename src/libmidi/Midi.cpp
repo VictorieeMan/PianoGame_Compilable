@@ -397,7 +397,7 @@ MidiEventListWithTrackId Midi::Update(microseconds_t delta_microseconds)
       const size_t event_count = track_events.size();
       for (size_t j = 0; j < event_count; ++j)
       {
-         aggregated_events.insert(aggregated_events.end(), make_pair<size_t, MidiEvent>(i, track_events[j]));
+          aggregated_events.insert(aggregated_events.end(), make_pair(i, track_events[j]));
       }
    }
 
