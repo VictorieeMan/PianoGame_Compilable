@@ -24,7 +24,7 @@
 #include "GameState.h"
 #include "State_Title.h"
 
-using namespace std;
+
 
 #ifdef WIN32
 
@@ -66,12 +66,12 @@ static const int WindowHeight = Compatible::GetDisplayHeight();
 
 GameStateManager state_manager(WindowWidth, WindowHeight);
 
-const static wstring application_name = L"PianoGame";
+const static std::wstring application_name = L"PianoGame";
 const static std::wstring friendly_app_name = WSTRING(L"Piano Game " << PianoGameVersionString);
 
-const static wstring error_header1 = L"Piano Game detected a";
-const static wstring error_header2 = L" problem and must close:\n\n";
-const static wstring error_footer = L"\n";
+const static std::wstring error_header1 = L"Piano Game detected a";
+const static std::wstring error_header2 = L" problem and must close:\n\n";
+const static std::wstring error_footer = L"\n";
 
 class EdgeTracker
 {
@@ -128,9 +128,9 @@ int main(int argc, char *argv[])
 
    try
    {
-      wstring command_line;
+        std::wstring command_line;
 
-      UserSetting::Initialize(application_name);
+        UserSetting::Initialize(application_name);
 
 #ifdef WIN32
       // CommandLineToArgvW is only available in Windows XP or later.  So,
@@ -147,7 +147,7 @@ int main(int argc, char *argv[])
          if (function)
          {
             // Grab the file argument from the command line if there is one.
-            wstring raw_command_line = GetCommandLine();
+             std::wstring raw_command_line = GetCommandLine();
 
             int argument_count;
             LPWSTR *arguments = (function)(raw_command_line.c_str(), &argument_count);
@@ -209,8 +209,8 @@ int main(int argc, char *argv[])
          }
          catch (const MidiError &e)
          {
-            wstring wrapped_description = WSTRING(L"Problem while loading file: " << command_line << L"\n") + e.GetErrorDescription();
-            Compatible::ShowError(wrapped_description);
+             std::wstring wrapped_description = WSTRING(L"Problem while loading file: " << command_line << L"\n") + e.GetErrorDescription();
+             Compatible::ShowError(wrapped_description);
 
             command_line = L"";
             midi = 0;
@@ -234,8 +234,8 @@ int main(int argc, char *argv[])
                }
                catch (const MidiError &e)
                {
-                  wstring wrapped_description = WSTRING(L"Problem while loading file: " << file_title << L"\n") + e.GetErrorDescription();
-                  Compatible::ShowError(wrapped_description);
+                    std::wstring wrapped_description = WSTRING(L"Problem while loading file: " << file_title << L"\n") + e.GetErrorDescription();
+                    Compatible::ShowError(wrapped_description);
 
                   midi = 0;
                }
@@ -400,23 +400,23 @@ int main(int argc, char *argv[])
    }
    catch (const PianoGameError &e)
    {
-      wstring wrapped_description = WSTRING(error_header1 << error_header2 << e.GetErrorDescription() << error_footer);
-      Compatible::ShowError(wrapped_description);
+        std::wstring wrapped_description = WSTRING(error_header1 << error_header2 << e.GetErrorDescription() << error_footer);
+        Compatible::ShowError(wrapped_description);
    }
    catch (const MidiError &e)
    {
-      wstring wrapped_description = WSTRING(error_header1 << L" MIDI" << error_header2 << e.GetErrorDescription() << error_footer);
-      Compatible::ShowError(wrapped_description);
+        std::wstring wrapped_description = WSTRING(error_header1 << L" MIDI" << error_header2 << e.GetErrorDescription() << error_footer);
+        Compatible::ShowError(wrapped_description);
    }
    catch (const std::exception &e)
    {
-      wstring wrapped_description = WSTRING(L"Piano Game detected an unknown problem and must close!  '" << e.what() << "'" << error_footer);
-      Compatible::ShowError(wrapped_description);
+        std::wstring wrapped_description = WSTRING(L"Piano Game detected an unknown problem and must close!  '" << e.what() << "'" << error_footer);
+        Compatible::ShowError(wrapped_description);
    }
    catch (...)
    {
-      wstring wrapped_description = WSTRING(L"Piano Game detected an unknown problem and must close!" << error_footer);
-      Compatible::ShowError(wrapped_description);
+        std::wstring wrapped_description = WSTRING(L"Piano Game detected an unknown problem and must close!" << error_footer);
+        Compatible::ShowError(wrapped_description);
    }
 
    return 1;
